@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule</title>
+    <style>
+        body {
+            background-color: #000000; /* Dark background */
+            color: #f8f9fa; /* Light text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #17a2b8;
+        }
+
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        table-layout: fixed; /* This ensures the table respects the width of the cells */
+    }
+
+    th, td {
+        border: 1px solid #dee2e6; /* Lighter border for visibility */
+        text-align: center;
+        padding: 8px;
+        word-wrap: break-word; /* Ensure long words do not cause the cell to expand */
+    }
+
+    th {
+        background-color: #1f364d; /* Darker header background */
+        max-width: 12px; /* Set a max-width for the headers (adjust as needed) */
+    }
+
+    td {
+        max-width: 12px; /* Set a max-width for the cells (adjust as needed) */
+    }
+
+        tr:nth-child(even) {
+            background-color: #0a1320; /* Zebra striping for rows */
+        }
+
+        button {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <h1>Your Schedule</h1>
+    {% for matrix in schedule %}
+    <div id="schedule-{{ loop.index }}" style="background: #000000; padding: 10px;">
+        <table>
+            <tr>
+                <th>Time/Day</th>
+                {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] %}
+                <th>{{ day }}</th>
+                {% endfor %}
+            </tr>
+            {% for i in range(13) %} <!-- Assuming 10 time slots from 08:00 to 17:00 -->
+            <tr>
+                <td>{{ 8 + i }}:40</td> <!-- Time slot label -->
+                {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] %}
+                <td>{{lessons_names[matrix[day][i]] if matrix[day][i] else "" }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <button onclick="downloadSchedule('schedule-{{ loop.index }}')">Download Schedule {{ loop.index }}</button>
+    </div>
+    {% endfor %}
+    <script>
+        function downloadSchedule(elementId) {
+            const scheduleElement = document.getElementById(elementId);
+            html2canvas(scheduleElement, {
+                backgroundColor: null, // Ensures background is transparent in the screenshot
+                onclone: (document) => {
+                    document.getElementById(elementId).style.backgroundColor = "#000000"; // Sets the background color for the cloned element
+                }
+            }).then(canvas => {
+                // Create a link to download the canvas image
+                let link = document.createElement('a');
+                link.download = elementId + '.png';
+                link.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
