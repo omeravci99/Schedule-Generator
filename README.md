@@ -12,7 +12,7 @@ This project is for educational purposes only. Course information used in this a
 - `excel_to_sql.py`: A script for converting Excel files containing course information to an SQLite database format.
 - `main.py`: Contains the core functions for processing course data, generating schedules, and validating them.
 - `course.db`: An SQLite database file containing course information.
-- `lessons/`: A directory containing Excel files with course information. (Note: Excel files are not shared.)
+- `lessons/`: A directory containing Excel files with course information. (Note: This directory is not shared.)
 - `templates/`: This directory contains template files used for generating reports or exporting schedules in different formats.
 
 
