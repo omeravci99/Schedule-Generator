@@ -4,7 +4,7 @@
 ## Description
 This project aims to generate possible schedules for a set of lessons based on their timings and constraints. It is designed to retrieve course information from an SQLite database, process the data, and generate schedules accordingly. The schedules are validated against certain constraints to ensure their feasibility.
 
-## Please note:
+## Important Note
 This project is for educational purposes only. Course information used in this application, including course names and details, is sourced from Özyeğin University for demonstration purposes only. However, actual course timings are used to provide realistic scheduling scenarios. This project does not represent actual course offerings or any confidential information from Özyeğin University 
 
 ## File Structure
@@ -26,7 +26,7 @@ git clone https://github.com/omeravci99/Schedule-Generator.git
 ```console
 cd Schedule-Generator
 ``` 
-4. Install the required dependencies by running:
+4. Install the required dependencies:
 ```console
 pip install -r requirements.txt
 ```
